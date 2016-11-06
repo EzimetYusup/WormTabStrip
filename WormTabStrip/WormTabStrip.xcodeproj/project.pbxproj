@@ -12,7 +12,7 @@
 		451071611DCEEB6C00411876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451071601DCEEB6C00411876 /* Assets.xcassets */; };
 		451071641DCEEB6C00411876 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 451071621DCEEB6C00411876 /* LaunchScreen.storyboard */; };
 		4510716E1DCEEEB500411876 /* WormTabStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510716C1DCEEEB500411876 /* WormTabStrip.swift */; };
-		4510716F1DCEEEB500411876 /* TestTabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510716D1DCEEEB500411876 /* TestTabButton.swift */; };
+		4510716F1DCEEEB500411876 /* WormTabStripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510716D1DCEEEB500411876 /* WormTabStripButton.swift */; };
 		451071721DCEEEBF00411876 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451071711DCEEEBF00411876 /* ExampleViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -24,7 +24,7 @@
 		451071631DCEEB6C00411876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		451071651DCEEB6C00411876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4510716C1DCEEEB500411876 /* WormTabStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormTabStrip.swift; sourceTree = "<group>"; };
-		4510716D1DCEEEB500411876 /* TestTabButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTabButton.swift; sourceTree = "<group>"; };
+		4510716D1DCEEEB500411876 /* WormTabStripButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormTabStripButton.swift; sourceTree = "<group>"; };
 		451071711DCEEEBF00411876 /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +73,7 @@
 			isa = PBXGroup;
 			children = (
 				4510716C1DCEEEB500411876 /* WormTabStrip.swift */,
-				4510716D1DCEEEB500411876 /* TestTabButton.swift */,
+				4510716D1DCEEEB500411876 /* WormTabStripButton.swift */,
 			);
 			path = WormLib;
 			sourceTree = "<group>";
@@ -158,7 +158,7 @@
 			files = (
 				451071721DCEEEBF00411876 /* ExampleViewController.swift in Sources */,
 				4510715C1DCEEB6C00411876 /* ViewController.swift in Sources */,
-				4510716F1DCEEEB500411876 /* TestTabButton.swift in Sources */,
+				4510716F1DCEEEB500411876 /* WormTabStripButton.swift in Sources */,
 				4510715A1DCEEB6C00411876 /* AppDelegate.swift in Sources */,
 				4510716E1DCEEEB500411876 /* WormTabStrip.swift in Sources */,
 			);
@@ -304,6 +304,7 @@
 				4510716A1DCEEB6C00411876 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
