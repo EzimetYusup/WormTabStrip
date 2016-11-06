@@ -1,0 +1,312 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4510715A1DCEEB6C00411876 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451071591DCEEB6C00411876 /* AppDelegate.swift */; };
+		4510715C1DCEEB6C00411876 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510715B1DCEEB6C00411876 /* ViewController.swift */; };
+		451071611DCEEB6C00411876 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 451071601DCEEB6C00411876 /* Assets.xcassets */; };
+		451071641DCEEB6C00411876 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 451071621DCEEB6C00411876 /* LaunchScreen.storyboard */; };
+		4510716E1DCEEEB500411876 /* WormTabStrip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510716C1DCEEEB500411876 /* WormTabStrip.swift */; };
+		4510716F1DCEEEB500411876 /* WormTabStripButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4510716D1DCEEEB500411876 /* WormTabStripButton.swift */; };
+		451071721DCEEEBF00411876 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451071711DCEEEBF00411876 /* ExampleViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		451071561DCEEB6C00411876 /* WormTabStrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WormTabStrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		451071591DCEEB6C00411876 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4510715B1DCEEB6C00411876 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		451071601DCEEB6C00411876 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		451071631DCEEB6C00411876 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		451071651DCEEB6C00411876 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4510716C1DCEEEB500411876 /* WormTabStrip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormTabStrip.swift; sourceTree = "<group>"; };
+		4510716D1DCEEEB500411876 /* WormTabStripButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WormTabStripButton.swift; sourceTree = "<group>"; };
+		451071711DCEEEBF00411876 /* ExampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		451071531DCEEB6C00411876 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4510714D1DCEEB6C00411876 = {
+			isa = PBXGroup;
+			children = (
+				451071581DCEEB6C00411876 /* WormTabStrip */,
+				451071571DCEEB6C00411876 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		451071571DCEEB6C00411876 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				451071561DCEEB6C00411876 /* WormTabStrip.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		451071581DCEEB6C00411876 /* WormTabStrip */ = {
+			isa = PBXGroup;
+			children = (
+				451071701DCEEEBF00411876 /* Example */,
+				4510716B1DCEEDFD00411876 /* WormLib */,
+				451071591DCEEB6C00411876 /* AppDelegate.swift */,
+				4510715B1DCEEB6C00411876 /* ViewController.swift */,
+				451071601DCEEB6C00411876 /* Assets.xcassets */,
+				451071621DCEEB6C00411876 /* LaunchScreen.storyboard */,
+				451071651DCEEB6C00411876 /* Info.plist */,
+			);
+			path = WormTabStrip;
+			sourceTree = "<group>";
+		};
+		4510716B1DCEEDFD00411876 /* WormLib */ = {
+			isa = PBXGroup;
+			children = (
+				4510716C1DCEEEB500411876 /* WormTabStrip.swift */,
+				4510716D1DCEEEB500411876 /* WormTabStripButton.swift */,
+			);
+			path = WormLib;
+			sourceTree = "<group>";
+		};
+		451071701DCEEEBF00411876 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				451071711DCEEEBF00411876 /* ExampleViewController.swift */,
+			);
+			path = Example;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		451071551DCEEB6C00411876 /* WormTabStrip */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 451071681DCEEB6C00411876 /* Build configuration list for PBXNativeTarget "WormTabStrip" */;
+			buildPhases = (
+				451071521DCEEB6C00411876 /* Sources */,
+				451071531DCEEB6C00411876 /* Frameworks */,
+				451071541DCEEB6C00411876 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WormTabStrip;
+			productName = WormTabStrip;
+			productReference = 451071561DCEEB6C00411876 /* WormTabStrip.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4510714E1DCEEB6C00411876 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = EzimetYusup;
+				TargetAttributes = {
+					451071551DCEEB6C00411876 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 451071511DCEEB6C00411876 /* Build configuration list for PBXProject "WormTabStrip" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4510714D1DCEEB6C00411876;
+			productRefGroup = 451071571DCEEB6C00411876 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				451071551DCEEB6C00411876 /* WormTabStrip */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		451071541DCEEB6C00411876 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				451071641DCEEB6C00411876 /* LaunchScreen.storyboard in Resources */,
+				451071611DCEEB6C00411876 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		451071521DCEEB6C00411876 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				451071721DCEEEBF00411876 /* ExampleViewController.swift in Sources */,
+				4510715C1DCEEB6C00411876 /* ViewController.swift in Sources */,
+				4510716F1DCEEEB500411876 /* WormTabStripButton.swift in Sources */,
+				4510715A1DCEEB6C00411876 /* AppDelegate.swift in Sources */,
+				4510716E1DCEEEB500411876 /* WormTabStrip.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		451071621DCEEB6C00411876 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				451071631DCEEB6C00411876 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		451071661DCEEB6C00411876 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		451071671DCEEB6C00411876 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		451071691DCEEB6C00411876 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WormTabStrip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = EzimetYusup.WormTabStrip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4510716A1DCEEB6C00411876 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = WormTabStrip/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = EzimetYusup.WormTabStrip;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		451071511DCEEB6C00411876 /* Build configuration list for PBXProject "WormTabStrip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				451071661DCEEB6C00411876 /* Debug */,
+				451071671DCEEB6C00411876 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		451071681DCEEB6C00411876 /* Build configuration list for PBXNativeTarget "WormTabStrip" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				451071691DCEEB6C00411876 /* Debug */,
+				4510716A1DCEEB6C00411876 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4510714E1DCEEB6C00411876 /* Project object */;
+}
