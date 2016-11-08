@@ -13,6 +13,10 @@ frame based, not auto layout constraint based.
 
 ![alt text](https://github.com/EzimetYusup/WormTabStrip/blob/develop/line.gif)
 
+##current example build environment
+XCode 7.3.1
+Swift 2.3
+
 ##apps using worm tab strip:
  [Bagdax News](https://itunes.apple.com/cn/app/baghdash-twry/id875137241?mt=8),
 screen shots:
