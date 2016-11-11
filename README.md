@@ -22,7 +22,7 @@ Swift 2.3
 #### CocoaPods 
 coming soon
 
-##apps using worm tab strip:
+## Apps using worm tab strip:
  [Bagdax News](https://itunes.apple.com/cn/app/baghdash-twry/id875137241?mt=8),
 screen shots:
 
