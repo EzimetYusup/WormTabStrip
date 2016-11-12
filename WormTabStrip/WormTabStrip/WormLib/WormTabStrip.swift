@@ -74,18 +74,18 @@ struct WormTabStripStylePropertyies {
      colors
      ****/
     
-    var tabItemDefaultColor:UIColor = .whiteColor()
+    var tabItemDefaultColor:UIColor = .white
     
-    var tabItemSelectedColor:UIColor = .redColor()
+    var tabItemSelectedColor:UIColor = .red
     
     //color for worm
     var WormColor:UIColor = UIColor(netHex: 0x1EAAF1)
     
     var topScrollViewBackgroundColor:UIColor = UIColor(netHex: 0x364756)
     
-    var contentScrollViewBackgroundColor:UIColor = UIColor.grayColor()
+    var contentScrollViewBackgroundColor:UIColor = UIColor.gray
     
-    var dividerBackgroundColor:UIColor = UIColor.redColor()
+    var dividerBackgroundColor:UIColor = UIColor.red
     
 }
 
@@ -149,7 +149,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         addContentScrollView()
         buildContent()
         checkAndJustify()
-        natruallySlideWormToPosition(tabs[0])
+        natruallySlideWormToPosition(tab: tabs[0])
     }
     
     private func validate(){
@@ -169,14 +169,14 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     
     // add top scroll view to the view stack which will contain the all the tabs
     private func addTopScrollView(){
-        topScrollView.frame = CGRectMake(0, 0, Width,eyStyle.kHeightOfTopScrollView)
+        topScrollView.frame = CGRect(x: 0,y: 0, width:Width,height:eyStyle.kHeightOfTopScrollView)
         topScrollView.backgroundColor = eyStyle.topScrollViewBackgroundColor
         topScrollView.showsHorizontalScrollIndicator = false
         self.addSubview(topScrollView)
     }
     // add divider between the top scroll view and content scroll view
     private func addDivider(){
-        divider.frame = CGRectMake(0, eyStyle.kHeightOfTopScrollView, Width, eyStyle.kHeightOfDivider)
+        divider.frame = CGRect(x:0,y: eyStyle.kHeightOfTopScrollView, width:Width, height:eyStyle.kHeightOfDivider)
         divider.backgroundColor = eyStyle.dividerBackgroundColor
         self.addSubview(divider)
     }
@@ -184,12 +184,12 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     private func addContentScrollView(){
         if eyStyle.isHideTopScrollView {
             //rootScrollView = UIScrollView(frame: CGRectMake(0,0,Width,Height))
-            contentScrollView.frame =  CGRectMake(0,0,Width,Height);
+            contentScrollView.frame =  CGRect(x:0,y:0,width:Width,height:Height);
         }else{
-            contentScrollView.frame = CGRectMake(0, eyStyle.kHeightOfTopScrollView+eyStyle.kHeightOfDivider, Width, Height-eyStyle.kHeightOfTopScrollView-eyStyle.kHeightOfDivider)
+            contentScrollView.frame = CGRect(x:0,y: eyStyle.kHeightOfTopScrollView+eyStyle.kHeightOfDivider,width:Width, height:Height-eyStyle.kHeightOfTopScrollView-eyStyle.kHeightOfDivider)
         }
         contentScrollView.backgroundColor = eyStyle.contentScrollViewBackgroundColor
-        contentScrollView.pagingEnabled = true
+        contentScrollView.isPagingEnabled = true
         contentScrollView.delegate = self
         contentScrollView.showsHorizontalScrollIndicator = false
         contentScrollView.showsVerticalScrollIndicator = false
@@ -220,7 +220,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
             //build the each tab and position it
             let tab:WormTabStripButton = WormTabStripButton()
             tab.index = i
-            formatButton(tab, XOffset: XOffset)
+            formatButton(tab: tab, XOffset: XOffset)
             XOffset += eyStyle.spacingBetweenTabs + tab.frame.width
             dynamicWidthOfTopScrollView += eyStyle.spacingBetweenTabs + tab.frame.width
             topScrollView.addSubview(tab)
@@ -236,13 +236,13 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         tab.frame.size.height = eyStyle.kHeightOfTopScrollView
         tab.paddingToEachSide = eyStyle.kPaddingOfIndicator
         //            tab.backgroundColor = UIColor.yellowColor()
-        tab.tabText = delegate!.WTStitlesOfTab(tab.index!)
+        tab.tabText = delegate!.WTStitlesOfTab(index: tab.index!) as NSString?
         tab.textColor = eyStyle.tabItemDefaultColor
         tab.frame.origin.x = XOffset
         tab.frame.origin.y = 0
-        tab.textAlignment = .Center
-        tab.userInteractionEnabled = true
-        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(WormTabStrip.tabPress(_:)))
+        tab.textAlignment = .center
+        tab.isUserInteractionEnabled = true
+        let tap:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tabPress(sender:)))
         tap.numberOfTapsRequired = 1
         tap.numberOfTouchesRequired = 1
         tab.addGestureRecognizer(tap)
@@ -254,7 +254,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         contentScrollView.contentSize.width = CGFloat(count)*self.frame.width
         for i in 0..<count{
             //position each content view
-            let view = delegate!.WTSviewOfTab(i)
+            let view = delegate!.WTSviewOfTab(index: i)
             view.frame.origin.x = CGFloat(i)*Width
             view.frame.origin.y = 0
             view.frame.size.height = contentScrollView.frame.size.height
@@ -296,17 +296,17 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         let tab:WormTabStripButton = tap.view as! WormTabStripButton
         
         currentTabIndex = tab.index!
-        natruallySlideWormToPosition(tab)
-        natruallySlideContentScrollViewToPosition(tab.index!)
-        adjustTopScrollViewsContentOffsetX(tab)
+        natruallySlideWormToPosition(tab: tab)
+        natruallySlideContentScrollViewToPosition(index: tab.index!)
+        adjustTopScrollViewsContentOffsetX(tab: tab)
     }
     
     /*******
      move worm to the correct position with slinding animation when the tabs are clicked
      ********/
     private func natruallySlideWormToPosition(tab:WormTabStripButton){
-        UIView.animateWithDuration(0.3) {
-            self.slideWormToTabPosition(tab)
+        UIView.animate(withDuration: 0.3) {
+            self.slideWormToTabPosition(tab: tab)
         }
     }
     
@@ -325,11 +325,11 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         let spacingBetweenTabs = eyStyle.spacingBetweenTabs
         //if tab at right edge of screen
         if XofTab - topScrollView.contentOffset.x > Width - (spacingBetweenTabs+widhtOfTab) {
-            topScrollView.setContentOffset(CGPointMake(XofTab - (Width-(spacingBetweenTabs+widhtOfTab)) , 0), animated: true)
+            topScrollView.setContentOffset(CGPoint(x:XofTab - (Width-(spacingBetweenTabs+widhtOfTab)) , y:0), animated: true)
         }
         //if tab at left edge of screen
         if XofTab - topScrollView.contentOffset.x  < spacingBetweenTabs {
-            topScrollView.setContentOffset(CGPointMake(XofTab - spacingBetweenTabs, 0), animated: true)
+            topScrollView.setContentOffset(CGPoint(x:XofTab - spacingBetweenTabs, y:0), animated: true)
         }
     }
     
@@ -337,8 +337,8 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
      move content scroll view to the correct position with animation when the tabs are clicked
      ********/
     private func natruallySlideContentScrollViewToPosition(index:Int){
-        let point = CGPointMake(CGFloat(index)*Width, 0)
-        UIView.animateWithDuration(0.3, animations: { 
+        let point = CGPoint(x:CGFloat(index)*Width,y: 0)
+        UIView.animate(withDuration: 0.3, animations: {
                 self.contentScrollView.setContentOffset(point, animated: false)
         }) { (finish) in
                 self.isUserTappingTab = false
@@ -353,7 +353,9 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     var currentWormX:CGFloat = 0
     var currentWormWidth:CGFloat = 0
     var contentScrollContentOffsetX:CGFloat = 0
-    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+    
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         currentTabIndex = Int(scrollView.contentOffset.x/Width)
         let tab = tabs[currentTabIndex]
         currentWormX = tab.frame.origin.x
@@ -361,7 +363,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         contentScrollContentOffsetX = scrollView.contentOffset.x
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //if user was tapping tab no need to do worm animation
         if isUserTappingTab == true {return}
         
@@ -378,15 +380,15 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
                 contentScrollContentOffsetX = currentX
                 currentTabIndex = Int(currentX/Width)
                 let tab = tabs[currentTabIndex]
-                natruallySlideWormToPosition(tab)
+                natruallySlideWormToPosition(tab: tab)
                 return
             }
             
             //if currentTab is not last one do worm to next tab position 
             if currentTabIndex + 1 <= tabs.count {
-                let nextDistance:CGFloat = calculateNextMoveDistance(gap, nextTotal: getNextTotalWormingDistance(currentTabIndex+1))
+                let nextDistance:CGFloat = calculateNextMoveDistance(gap: gap, nextTotal: getNextTotalWormingDistance(index: currentTabIndex+1))
                 // println(nextDistance)
-                setWidthAndHeightOfWormForDistance(nextDistance)
+                setWidthAndHeightOfWormForDistance(distance: nextDistance)
 
             }
             
@@ -397,9 +399,9 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
             gap = contentScrollContentOffsetX - currentX
             //if current is not first tab at left do worm to left
             if currentTabIndex  >= 1  {
-                let nextDistance:CGFloat = calculateNextMoveDistance(gap, nextTotal: getNextTotalWormingDistance(currentTabIndex-1))
+                let nextDistance:CGFloat = calculateNextMoveDistance(gap: gap, nextTotal: getNextTotalWormingDistance(index: currentTabIndex-1))
                  print(nextDistance)
-                wormToNextLeft(nextDistance)
+                wormToNextLeft(distance: nextDistance)
             }
             
             
@@ -407,14 +409,14 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentX = scrollView.contentOffset.x
         currentTabIndex = Int(currentX/Width)
         let tab = tabs[currentTabIndex]
         
-        adjustTopScrollViewsContentOffsetX(tab)
-        UIView.animateWithDuration(0.23) {
-            self.slideWormToTabPosition(tab)
+        adjustTopScrollViewsContentOffsetX(tab: tab)
+        UIView.animate(withDuration: 0.23) {
+            self.slideWormToTabPosition(tab: tab)
             self.resetHeightOfWorm()
         }
         
@@ -446,7 +448,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
             resetHeightOfWorm()
             
         }else{
-            let height:CGFloat  = self.calculatePrespectiveHeightOfIndicatorLine(distance)
+            let height:CGFloat  = self.calculatePrespectiveHeightOfIndicatorLine(distance: distance)
             worm.frame.size.height = height
             
             worm.frame.size.width = currentWormWidth + distance
@@ -462,7 +464,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     }
     
     private func wormToNextLeft(distance:CGFloat){
-        setWidthAndHeightOfWormForDistance(distance)
+        setWidthAndHeightOfWormForDistance(distance: distance)
         worm.frame.origin.x = currentWormX -  distance
     }
     
@@ -507,12 +509,12 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     func scrollHandleUIPanGestureRecognizer(panParam:UIPanGestureRecognizer){
         
         if contentScrollView.contentOffset.x <= 0 {
-            self.delegate?.WTSgotLeftEdge(panParam)
+            self.delegate?.WTSgotLeftEdge(panParam: panParam)
         }
             
         else
             if contentScrollView.contentOffset.x >= contentScrollView.contentSize.width -  contentScrollView.bounds.size.width {
-                self.delegate?.WTSgotRightEdge(panParam)
+                self.delegate?.WTSgotRightEdge(panParam: panParam)
         }
         
     }

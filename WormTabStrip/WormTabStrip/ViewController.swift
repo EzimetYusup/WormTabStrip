@@ -14,7 +14,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         let table:UITableView = UITableView(frame: self.view.frame)
         //table.backgroundColor = UIColor.redColor()
-        table.backgroundColor = .clearColor()
+        table.backgroundColor = .clear
         self.view.addSubview(table)
         // Do any additional setup after loading the view, typically from a nib.
     }

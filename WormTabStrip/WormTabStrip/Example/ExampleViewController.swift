@@ -13,8 +13,8 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(netHex: 0x364756)
-        
-        let viewPager:WormTabStrip = WormTabStrip(frame: CGRectMake(0, 40, self.view.frame.size.width, self.view.frame.size.height-40))
+        let frame =  CGRect(x: 0, y: 40, width: self.view.frame.size.width, height: self.view.frame.size.height - 40)
+        let viewPager:WormTabStrip = WormTabStrip(frame: frame)
         viewPager.delegate = self
 //        viewPager.eyStyle.topScrollViewBackgroundColor = UIColor(netHex: 0x364756)
         self.view.addSubview(viewPager)
@@ -34,9 +34,9 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
     
         let view:ViewController = ViewController()
         if index%2 == 0 {
-            view.view.backgroundColor = UIColor.whiteColor()
+            view.view.backgroundColor = UIColor.white
         }else{
-            view.view.backgroundColor = UIColor.grayColor()
+            view.view.backgroundColor = UIColor.gray
         }
         //        if index == 2 || index == 5{
         //            view.view.backgroundColor = UIColor.redColor()
@@ -58,8 +58,6 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
     func WTSgotRightEdge(panParam: UIPanGestureRecognizer) {
         
     }
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
-    }
+    
     
 }
