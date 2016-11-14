@@ -50,7 +50,7 @@ viewPager.eyStyle.dividerBackgroundColor = .red
 viewPager.eyStyle.tabItemSelectedColor = .yellow
 ...
 ```        
-before you before you call 
+before you  you call 
 ```swift
 viewPager.buildUI() 
 ```
