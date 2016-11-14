@@ -21,7 +21,7 @@ frame based, not auto layout constraint based.
 ## Current example build environment
 XCode 7.3.1 & 8.1 beta 4
 
-Swift 2.3
+Swift 2.3 & Swift 3
 
 ## Installation
 
