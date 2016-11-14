@@ -33,7 +33,7 @@ coming soon
 2. Congratulations!  
 
 #### Looking for swift 3?
-checkout brach swift3 
+checkout brach [swift3](https://github.com/EzimetYusup/WormTabStrip/tree/swift3)
 
 ## Usage example
 implement the [WormTabStripDelegate](https://github.com/EzimetYusup/WormTabStrip/blob/master/WormTabStrip/WormTabStrip/WormLib/WormTabStrip.swift#L11) in your UIViewController then do
