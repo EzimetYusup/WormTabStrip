@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-protocol WormTabStripDelegate:class {
+public protocol WormTabStripDelegate:class {
     
     //return the Number SubViews in the ViewPager
     func WTSnumberOfTab()->Int
@@ -24,12 +24,12 @@ protocol WormTabStripDelegate:class {
     
 }
 
-enum WormStyle{
+public enum WormStyle{
     case BUBBLE
     case LINE
 }
 
-struct WormTabStripStylePropertyies {
+public struct WormTabStripStylePropertyies {
     
     var wormStyel:WormStyle = .BUBBLE
     /**********************
@@ -44,6 +44,7 @@ struct WormTabStripStylePropertyies {
     
     var kHeightOfTopScrollView:CGFloat = 50
     
+    var kMinimumWormHeightRatio:CGFloat = 4/5
     
     /**********************
      paddings
@@ -90,16 +91,16 @@ struct WormTabStripStylePropertyies {
 }
 
 
-class WormTabStrip: UIView,UIScrollViewDelegate {
+public class WormTabStrip: UIView,UIScrollViewDelegate {
     
     private let topScrollView:UIScrollView = UIScrollView()
     
     private let contentScrollView:UIScrollView = UIScrollView()
     
     
-    var Width:CGFloat!
+    public var Width:CGFloat!
     
-    var Height:CGFloat!
+    public var Height:CGFloat!
     
     private var titles:[String]! = []
     
@@ -111,7 +112,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     
     private let worm:UIView = UIView()
     
-    var eyStyle:WormTabStripStylePropertyies = WormTabStripStylePropertyies()
+    public var eyStyle:WormTabStripStylePropertyies = WormTabStripStylePropertyies()
     
     //delegate
     weak var delegate:WormTabStripDelegate?
@@ -131,11 +132,11 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         Width = self.frame.width
         Height = self.frame.height
     }
-    convenience required init(key:String) {
+    convenience required public init(key:String) {
         self.init(frame:CGRect.zero)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
@@ -150,6 +151,7 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         buildContent()
         checkAndJustify()
         natruallySlideWormToPosition(tab: tabs[0])
+        setTabStyle()
     }
     
     private func validate(){
@@ -295,7 +297,10 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         let tap:UIGestureRecognizer = sender as! UIGestureRecognizer
         let tab:WormTabStripButton = tap.view as! WormTabStripButton
         
+        prevTabIndex = currentTabIndex
         currentTabIndex = tab.index!
+        setTabStyle()
+        
         natruallySlideWormToPosition(tab: tab)
         natruallySlideContentScrollViewToPosition(index: tab.index!)
         adjustTopScrollViewsContentOffsetX(tab: tab)
@@ -349,23 +354,31 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
     /*************************************************
     //MARK: UIScrollView Delegate start
     ******************************************/
+   var prevTabIndex = 0
     var currentTabIndex = 0
     var currentWormX:CGFloat = 0
     var currentWormWidth:CGFloat = 0
     var contentScrollContentOffsetX:CGFloat = 0
     
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         currentTabIndex = Int(scrollView.contentOffset.x/Width)
+        
+        setTabStyle()
+        prevTabIndex = currentTabIndex
         let tab = tabs[currentTabIndex]
+        //need to call setTabStyle twice because, when user swipe their finger really fast, scrollViewWillBeginDragging method will be called agian without scrollViewDidEndDecelerating get call
+        setTabStyle()
         currentWormX = tab.frame.origin.x
         currentWormWidth = tab.frame.width
         contentScrollContentOffsetX = scrollView.contentOffset.x
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //if user was tapping tab no need to do worm animation
         if isUserTappingTab == true {return}
+        
+        if eyStyle.isWormEnable == false {return}
         
         let currentX = scrollView.contentOffset.x
         var gap:CGFloat = 0
@@ -409,10 +422,11 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let currentX = scrollView.contentOffset.x
         currentTabIndex = Int(currentX/Width)
         let tab = tabs[currentTabIndex]
+        setTabStyle()
         
         adjustTopScrollViewsContentOffsetX(tab: tab)
         UIView.animate(withDuration: 0.23) {
@@ -494,16 +508,32 @@ class WormTabStrip: UIView,UIScrollViewDelegate {
         }
         
         //if the height of worm becoming too small just make it half of it
-        if height < (originalHeight*4/5) {
-            height = originalHeight*4/5
+        if height < (originalHeight*eyStyle.kMinimumWormHeightRatio) {
+           height = originalHeight*eyStyle.kMinimumWormHeightRatio
         }
         
 //        return worm.frame.height
         return height
     }
 
+    private func setTabStyle(){
+        makePrevTabDefaultStyle()
+        makeCurrentTabSelectedStyle()
+    }
+    
+    private func makePrevTabDefaultStyle(){
+        let tab = tabs[prevTabIndex]
+        tab.textColor = eyStyle.tabItemDefaultColor
+        tab.font = eyStyle.tabItemDefaultFont
+    }
+    
+    private func makeCurrentTabSelectedStyle(){
+        let tab = tabs[currentTabIndex]
+        tab.textColor = eyStyle.tabItemSelectedColor
+        tab.font = eyStyle.tabItemSelectedFont
+    }
     /*************************************************
-     //MARK:  UIScrollView Delegate Calculations Ends
+     //MARK:  Worm Calculations Ends
      ******************************************/
     
     func scrollHandleUIPanGestureRecognizer(panParam:UIPanGestureRecognizer){
