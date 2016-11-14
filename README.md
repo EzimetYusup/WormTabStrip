@@ -44,7 +44,7 @@ viewPager.delegate = self
 self.view.addSubview(viewPager)
 viewPager.buildUI()
 ```
-#### Need custom style? 
+## Need custom style? 
 
 checkout  [WormTabStripStylePropertyies] (https://github.com/EzimetYusup/WormTabStrip/blob/master/WormTabStrip/WormTabStrip/WormLib/WormTabStrip.swift#L32) struct, give your custom style 
 ```swift 
@@ -59,7 +59,26 @@ before you  you call
 ```swift
 viewPager.buildUI() 
 ```
-
+### Available customization properties 
+|Property|Description|
+|:--|:--|
+|wormStyel|style of the worm bubble or line|
+|kHeightOfWorm| worm height for line style|
+|kHeightOfWormForBubble| worm height for bubble style|
+|kHeightOfDivider| divider height between top scrollview and conent scrollview|
+|kHeightOfTopScrollView| Top scrollView height which hold all tabs|
+|kMinimumWormHeightRatio | minimum worm height Ratio, it should be less than 1|
+|kPaddingOfIndicator | Padding of tab button, from text to button each side|
+|spacingBetweenTabs | space between tab buttons|
+|isWormEnable| boolean, if false it will not animate worm|
+|tabItemDefaultFont| font for unSelected tab|
+|tabItemSelectedFont| font for selected tab|
+|tabItemDefaultColor| text color for unSelected tab|
+|tabItemSelectedColor| text color for selected tab|
+|WormColor| color for worm|
+|topScrollViewBackgroundColor | back ground color of top scroll view which hold all tabs|
+|contentScrollViewBackgroundColor| back ground color fo content scroll view|
+|dividerBackgroundColor | back ground color of divider view between top scroll view and content scroll view|
 
 
 ## Apps using worm tab strip:
