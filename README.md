@@ -8,7 +8,8 @@ frame based, not auto layout constraint based.
 [![Swift Version][swift-image]][swift-url]
 [![License][license-image]][license-url]
 [![Platform](https://img.shields.io/cocoapods/p/LFAlertController.svg?style=flat)](http://cocoapods.org/pods/LFAlertController)
-##there are two styles of worm tab strip:
+
+## there are two styles of worm tab strip:
 
 * Bubble style:
 
@@ -46,7 +47,7 @@ viewPager.buildUI()
 ```
 ## Need custom style? 
 
-checkout  [WormTabStripStylePropertyies] (https://github.com/EzimetYusup/WormTabStrip/blob/master/WormTabStrip/WormTabStrip/WormLib/WormTabStrip.swift#L32) struct, give your custom style 
+checkout  [WormTabStripStylePropertyies](https://github.com/EzimetYusup/WormTabStrip/blob/master/WormTabStrip/WormTabStrip/WormLib/WormTabStrip.swift#L32) struct, give your custom style 
 ```swift 
 viewPager.eyStyle.wormStyel = .LINE
 viewPager.eyStyle.isWormEnable = false
