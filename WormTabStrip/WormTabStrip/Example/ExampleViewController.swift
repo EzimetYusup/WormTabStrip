@@ -15,15 +15,19 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
         self.view.backgroundColor = UIColor(netHex: 0x364756)
         let frame =  CGRect(x: 0, y: 40, width: self.view.frame.size.width, height: self.view.frame.size.height - 40)
         let viewPager:WormTabStrip = WormTabStrip(frame: frame)
-        viewPager.delegate = self
-//        viewPager.eyStyle.topScrollViewBackgroundColor = UIColor(netHex: 0x364756)
         self.view.addSubview(viewPager)
+        viewPager.delegate = self
+        viewPager.eyStyle.wormStyel = .BUBBLE
+        viewPager.eyStyle.isWormEnable = true
+        viewPager.eyStyle.spacingBetweenTabs = 15
+        viewPager.eyStyle.dividerBackgroundColor = .red
+        viewPager.eyStyle.tabItemSelectedColor = .yellow
         
         viewPager.buildUI()
     }
     
     func WTSnumberOfTab() -> Int {
-        return 5
+        return 10
     }
     
     func WTStitlesOfTab(index: Int) -> String {
@@ -45,10 +49,6 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
         
         
         return view.view
-        
-        
-        
-        
     }
     
     func WTSgotLeftEdge(panParam: UIPanGestureRecognizer) {

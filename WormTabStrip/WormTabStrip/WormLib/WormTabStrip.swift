@@ -97,6 +97,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     
     private let contentScrollView:UIScrollView = UIScrollView()
     
+    public var shouldCenterSelectedWorm = true
     
     public var Width:CGFloat!
     
@@ -304,6 +305,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         natruallySlideWormToPosition(tab: tab)
         natruallySlideContentScrollViewToPosition(index: tab.index!)
         adjustTopScrollViewsContentOffsetX(tab: tab)
+        centerCurrentlySelectedWorm(tab: tab)
     }
     
     /*******
@@ -336,6 +338,29 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         if XofTab - topScrollView.contentOffset.x  < spacingBetweenTabs {
             topScrollView.setContentOffset(CGPoint(x:XofTab - spacingBetweenTabs, y:0), animated: true)
         }
+    }
+    
+    func centerCurrentlySelectedWorm(tab:WormTabStripButton){
+        //check the settings
+        if shouldCenterSelectedWorm == false {return}
+        //if worm tab was right/left side of screen and if there are enough space to scroll to center
+        let XofTab:CGFloat = tab.frame.origin.x
+        let toLeftOfScreen = (Width-tab.frame.width)/2
+        //return if there is no enough space at right
+        if XofTab + tab.frame.width + toLeftOfScreen > topScrollView.contentSize.width{
+            return
+        }
+        //return if there is no enough space at left
+        if XofTab - toLeftOfScreen < 0 {
+            return
+        }
+        //center it 
+        if topScrollView.contentSize.width - XofTab+tab.frame.width > toLeftOfScreen{
+            // XofTab = x + (screenWidth-tab.frame.width)/2
+            let offsetX = XofTab - toLeftOfScreen
+            topScrollView.setContentOffset(CGPoint.init(x: offsetX, y: 0), animated: true)
+        }
+        
     }
     
     /*******
@@ -432,6 +457,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         UIView.animate(withDuration: 0.23) {
             self.slideWormToTabPosition(tab: tab)
             self.resetHeightOfWorm()
+            self.centerCurrentlySelectedWorm(tab: tab)
         }
         
     }
