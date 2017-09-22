@@ -33,8 +33,8 @@ coming soon
 1. Download and drop ```WormTabStrip.swift``` and ```WormTabStripButton.swift``` in your project.  
 2. Congratulations!  
 
-#### Looking for swift 3?
-checkout brach [swift3](https://github.com/EzimetYusup/WormTabStrip/tree/swift3)
+#### Looking for swift 2.3?
+checkout brach [swift2.3](https://github.com/EzimetYusup/WormTabStrip/tree/swift2.3)
 
 ## Usage example
 implement the [WormTabStripDelegate](https://github.com/EzimetYusup/WormTabStrip/blob/master/WormTabStrip/WormTabStrip/WormLib/WormTabStrip.swift#L11) in your UIViewController then do
