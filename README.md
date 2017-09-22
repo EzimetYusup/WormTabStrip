@@ -20,7 +20,7 @@ frame based, not auto layout constraint based.
 ![alt text](https://github.com/EzimetYusup/WormTabStrip/blob/develop/line.gif)
 
 ## Current example build environment
-XCode 7.3.1 & 8.1 beta 4
+XCode 8.3.1
 
 Swift 2.3 & Swift 3
 
@@ -42,7 +42,15 @@ implement the [WormTabStripDelegate](https://github.com/EzimetYusup/WormTabStrip
 let frame =  CGRect(x: 0, y: 40, width: self.view.frame.size.width, height: self.view.frame.size.height - 40)
 let viewPager:WormTabStrip = WormTabStrip(frame: frame)
 viewPager.delegate = self
-self.view.addSubview(viewPager)
+viewPager.eyStyle.wormStyel = .BUBBLE
+viewPager.eyStyle.isWormEnable = true
+viewPager.eyStyle.spacingBetweenTabs = 15
+viewPager.eyStyle.dividerBackgroundColor = .red
+viewPager.eyStyle.tabItemSelectedColor = .yellow
+//default selected tab
+viewPager.currentTabIndex = 3
+//center the selected tab
+viewPager.shouldCenterSelectedWorm = true
 viewPager.buildUI()
 ```
 ## Need custom style? 
