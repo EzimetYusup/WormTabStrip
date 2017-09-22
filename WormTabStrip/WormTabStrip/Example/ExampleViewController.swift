@@ -22,7 +22,7 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
         viewPager.eyStyle.spacingBetweenTabs = 15
         viewPager.eyStyle.dividerBackgroundColor = .red
         viewPager.eyStyle.tabItemSelectedColor = .yellow
-        
+        viewPager.currentTabIndex = 3
         viewPager.buildUI()
     }
     
@@ -31,6 +31,9 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
     }
     
     func WTStitlesOfTab(index: Int) -> String {
+        if(index%4==0){
+            return "really long and longer Tab \(index)"
+        }
         return "Tab \(index)"
     }
     

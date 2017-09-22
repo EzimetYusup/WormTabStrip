@@ -151,7 +151,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         addContentScrollView()
         buildContent()
         checkAndJustify()
-        natruallySlideWormToPosition(tab: tabs[0])
+        selectTabAt(index: currentTabIndex)
         setTabStyle()
     }
     
@@ -297,7 +297,16 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         
         let tap:UIGestureRecognizer = sender as! UIGestureRecognizer
         let tab:WormTabStripButton = tap.view as! WormTabStripButton
-        
+        selectTab(tab: tab)
+    }
+    
+    func selectTabAt(index:Int){
+        if index >= tabs.count {return}
+        let tab = tabs[index]
+        selectTab(tab: tab)
+    }
+    
+    private func selectTab(tab:WormTabStripButton){
         prevTabIndex = currentTabIndex
         currentTabIndex = tab.index!
         setTabStyle()
@@ -379,7 +388,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     /*************************************************
     //MARK: UIScrollView Delegate start
     ******************************************/
-   var prevTabIndex = 0
+    var prevTabIndex = 0
     var currentTabIndex = 0
     var currentWormX:CGFloat = 0
     var currentWormWidth:CGFloat = 0
