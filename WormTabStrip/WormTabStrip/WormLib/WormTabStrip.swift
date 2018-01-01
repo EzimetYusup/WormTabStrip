@@ -11,16 +11,16 @@ import UIKit
 public protocol WormTabStripDelegate:class {
     
     //return the Number SubViews in the ViewPager
-    func WTSnumberOfTab()->Int
+    func WTSNumberOfTabs()->Int
     //return the View for sepecific position
-    func WTSviewOfTab(index:Int)->UIView
+    func WTSViewOfTab(index:Int)->UIView
     //return the title for each view
-    func WTStitlesOfTab(index:Int) -> String
+    func WTSTitleForTab(index:Int) -> String
     
     //the delegate that ViewPager has got End with Left Direction
-    func WTSgotLeftEdge(panParam:UIPanGestureRecognizer)
+    func WTSReachedLeftEdge(panParam:UIPanGestureRecognizer)
     //the delegate that ViewPager has got End with Right Direction
-    func WTSgotRightEdge(panParam:UIPanGestureRecognizer)
+    func WTSReachedRightEdge(panParam:UIPanGestureRecognizer)
     
 }
 
@@ -69,7 +69,7 @@ public struct WormTabStripStylePropertyies {
     // font size of tabs
     //let kFontSizeOfTabButton:CGFloat = 15
     var tabItemDefaultFont:UIFont = UIFont(name: "arial", size: 14)!
-    var tabItemSelectedFont:UIFont = UIFont(name: "arial", size: 15)!
+    var tabItemSelectedFont:UIFont = UIFont(name: "arial", size: 16)!
     
     /*****
      colors
@@ -219,7 +219,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     private func buildTopScrollViewsContent(){
         dynamicWidthOfTopScrollView = 0
         var XOffset:CGFloat = eyStyle.spacingBetweenTabs;
-        for i in 0..<delegate!.WTSnumberOfTab() {
+        for i in 0..<delegate!.WTSNumberOfTabs(){
             //build the each tab and position it
             let tab:WormTabStripButton = WormTabStripButton()
             tab.index = i
@@ -239,7 +239,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         tab.frame.size.height = eyStyle.kHeightOfTopScrollView
         tab.paddingToEachSide = eyStyle.kPaddingOfIndicator
         //            tab.backgroundColor = UIColor.yellowColor()
-        tab.tabText = delegate!.WTStitlesOfTab(index: tab.index!) as NSString?
+        tab.tabText = delegate!.WTSTitleForTab(index: tab.index!) as NSString?
         tab.textColor = eyStyle.tabItemDefaultColor
         tab.frame.origin.x = XOffset
         tab.frame.origin.y = 0
@@ -253,11 +253,11 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     
     // add all content views to content scroll view and tabs to top scroll view
     private func buildContentScrollViewsContent(){
-        let count = delegate!.WTSnumberOfTab()
+        let count = delegate!.WTSNumberOfTabs()
         contentScrollView.contentSize.width = CGFloat(count)*self.frame.width
         for i in 0..<count{
             //position each content view
-            let view = delegate!.WTSviewOfTab(index: i)
+            let view = delegate!.WTSViewOfTab(index: i)
             view.frame.origin.x = CGFloat(i)*Width
             view.frame.origin.y = 0
             view.frame.size.height = contentScrollView.frame.size.height
@@ -276,7 +276,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
             let gap:CGFloat = Width - dynamicWidthOfTopScrollView
             // increase the space by dividing available space to # of tab plus one 
             //plus one bc we always want to have margin from last tab to to right edge of screen
-            eyStyle.spacingBetweenTabs +=  gap/CGFloat(delegate!.WTSnumberOfTab()+plusOneforMarginOfLastTabToScreenEdge)
+            eyStyle.spacingBetweenTabs +=  gap/CGFloat(delegate!.WTSNumberOfTabs()+plusOneforMarginOfLastTabToScreenEdge)
             dynamicWidthOfTopScrollView = 0
             var XOffset:CGFloat = eyStyle.spacingBetweenTabs;
             for tab in tabs {
@@ -574,12 +574,12 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     func scrollHandleUIPanGestureRecognizer(panParam:UIPanGestureRecognizer){
         
         if contentScrollView.contentOffset.x <= 0 {
-            self.delegate?.WTSgotLeftEdge(panParam: panParam)
+            self.delegate?.WTSReachedLeftEdge(panParam: panParam)
         }
             
         else
             if contentScrollView.contentOffset.x >= contentScrollView.contentSize.width -  contentScrollView.bounds.size.width {
-                self.delegate?.WTSgotRightEdge(panParam: panParam)
+                self.delegate?.WTSReachedRightEdge(panParam: panParam)
         }
         
     }

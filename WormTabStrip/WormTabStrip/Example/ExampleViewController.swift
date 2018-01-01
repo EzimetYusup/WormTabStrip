@@ -10,9 +10,23 @@ import Foundation
 import UIKit
 
 class ExampleViewController: UIViewController,WormTabStripDelegate {
+    var tabs:[UIViewController] = []
+    let numberOfTabs = 10
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(netHex: 0x364756)
+        setUpTabs()
+        setUpViewPager()
+    }
+    
+    func setUpTabs(){
+        for i in 1...numberOfTabs {
+            let vc = ViewController()
+            tabs.append(vc)
+        }
+    }
+    
+    func setUpViewPager(){
         let frame =  CGRect(x: 0, y: 40, width: self.view.frame.size.width, height: self.view.frame.size.height - 40)
         let viewPager:WormTabStrip = WormTabStrip(frame: frame)
         self.view.addSubview(viewPager)
@@ -26,39 +40,27 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
         viewPager.buildUI()
     }
     
-    func WTSnumberOfTab() -> Int {
-        return 10
+    func WTSNumberOfTabs() -> Int {
+        return numberOfTabs
     }
     
-    func WTStitlesOfTab(index: Int) -> String {
+    func WTSTitleForTab(index: Int) -> String {
         if(index%4==0){
             return "really long and longer Tab \(index)"
         }
         return "Tab \(index)"
     }
     
-    func WTSviewOfTab(index: Int) -> UIView {
-    
-        let view:ViewController = ViewController()
-        if index%2 == 0 {
-            view.view.backgroundColor = UIColor.white
-        }else{
-            view.view.backgroundColor = UIColor.gray
-        }
-        //        if index == 2 || index == 5{
-        //            view.view.backgroundColor = UIColor.redColor()
-        //            
-        //        }
-        
-        
+    func WTSViewOfTab(index: Int) -> UIView {
+        let view = tabs[index]
         return view.view
     }
     
-    func WTSgotLeftEdge(panParam: UIPanGestureRecognizer) {
+    func WTSReachedLeftEdge(panParam: UIPanGestureRecognizer) {
         
     }
     
-    func WTSgotRightEdge(panParam: UIPanGestureRecognizer) {
+    func WTSReachedRightEdge(panParam: UIPanGestureRecognizer) {
         
     }
     

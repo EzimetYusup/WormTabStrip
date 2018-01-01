@@ -8,14 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, UITableViewDataSource {
+    var table:UITableView!
+    let fruits = ["Apple", "Apricot", "Banana", "Blueberry", "Cantaloupe", "Cherry",
+                  "Clementine", "Coconut", "Cranberry", "Fig", "Grape", "Grapefruit",
+                  "Kiwi fruit", "Lemon", "Lime", "Lychee", "Mandarine", "Mango",
+                  "Melon", "Nectarine", "Olive", "Orange", "Papaya", "Peach",
+                  "Pear", "Pineapple", "Raspberry", "Strawberry"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let table:UITableView = UITableView(frame: self.view.frame)
+        table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
         //table.backgroundColor = UIColor.redColor()
         table.backgroundColor = .clear
+        table.register(UITableViewCell.self, forCellReuseIdentifier: "LabelCell")
+        table.dataSource = self
         self.view.addSubview(table)
+        //auto layout make table view fill super view
+        let widthConstraint  = NSLayoutConstraint(item: table, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: table, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        view.addConstraints([widthConstraint, heightConstraint])
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -23,7 +36,27 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fruits.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
+        
+        cell.textLabel?.text = fruits[indexPath.row]
+        
+        return cell
+    }
+    
+    override func updateViewConstraints() {
 
+        super.updateViewConstraints()
+    }
 
 }
 
