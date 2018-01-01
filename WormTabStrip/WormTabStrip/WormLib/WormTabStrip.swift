@@ -291,7 +291,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     /*******
      tabs selector
      ********/
-     func tabPress(sender:AnyObject){
+     @objc func tabPress(sender:AnyObject){
         
         isUserTappingTab = true
         
@@ -571,7 +571,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
      //MARK:  Worm Calculations Ends
      ******************************************/
     
-    func scrollHandleUIPanGestureRecognizer(panParam:UIPanGestureRecognizer){
+    @objc func scrollHandleUIPanGestureRecognizer(panParam:UIPanGestureRecognizer){
         
         if contentScrollView.contentOffset.x <= 0 {
             self.delegate?.WTSReachedLeftEdge(panParam: panParam)
