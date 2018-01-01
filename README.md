@@ -27,7 +27,9 @@ Swift 4
 ## Installation
 
 #### CocoaPods 
-coming soon
+```
+pod 'WormTabStrip', '~> 1.0'
+```
 
 #### Manually
 1. Download and drop ```WormTabStrip.swift``` and ```WormTabStripButton.swift``` in your project.  
