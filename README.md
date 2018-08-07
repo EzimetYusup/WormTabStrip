@@ -43,6 +43,7 @@ implement the [WormTabStripDelegate](https://github.com/EzimetYusup/WormTabStrip
 ```swift
 let frame =  CGRect(x: 0, y: 40, width: self.view.frame.size.width, height: self.view.frame.size.height - 40)
 let viewPager:WormTabStrip = WormTabStrip(frame: frame)
+self.view.addSubview(viewPager) //IMPORTANT!
 viewPager.delegate = self
 viewPager.eyStyle.wormStyel = .BUBBLE
 viewPager.eyStyle.isWormEnable = true
