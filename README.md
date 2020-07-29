@@ -20,9 +20,9 @@ frame based, not auto layout constraint based.
 ![alt text](https://github.com/EzimetYusup/WormTabStrip/blob/develop/line.gif)
 
 ## Current example build environment
-XCode 9.2
+XCode 11.4
 
-Swift 4
+Swift 5
 
 ## Installation
 
