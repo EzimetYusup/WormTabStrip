@@ -45,7 +45,7 @@ let frame =  CGRect(x: 0, y: 40, width: self.view.frame.size.width, height: self
 let viewPager:WormTabStrip = WormTabStrip(frame: frame)
 self.view.addSubview(viewPager) //IMPORTANT!
 viewPager.delegate = self
-viewPager.eyStyle.wormStyel = .BUBBLE
+viewPager.eyStyle.wormStyel = .bubble
 viewPager.eyStyle.isWormEnable = true
 viewPager.eyStyle.spacingBetweenTabs = 15
 viewPager.eyStyle.dividerBackgroundColor = .red
@@ -60,7 +60,7 @@ viewPager.buildUI()
 
 checkout  [WormTabStripStylePropertyies](https://github.com/EzimetYusup/WormTabStrip/blob/master/WormTabStrip/WormTabStrip/WormLib/WormTabStrip.swift#L32) struct, give your custom style 
 ```swift 
-viewPager.eyStyle.wormStyel = .LINE
+viewPager.eyStyle.wormStyel = .line
 viewPager.eyStyle.isWormEnable = false
 viewPager.eyStyle.spacingBetweenTabs = 15
 viewPager.eyStyle.dividerBackgroundColor = .red
