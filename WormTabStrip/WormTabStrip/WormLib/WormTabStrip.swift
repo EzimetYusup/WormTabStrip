@@ -8,19 +8,21 @@
 
 import Foundation
 import UIKit
-public protocol WormTabStripDelegate:class {
+public protocol WormTabStripDelegate: class {
     
     //return the Number SubViews in the ViewPager
-    func WTSNumberOfTabs() -> Int
+    func wtsNumberOfTabs() -> Int
     //return the View for sepecific position
-    func WTSViewOfTab(index:Int) -> UIView
+    func wtsViewOfTab(index:Int) -> UIView
     //return the title for each view
-    func WTSTitleForTab(index:Int) -> String
+    func wtsTitleForTab(index:Int) -> String
+
+    func wtsDidSelectTab(index:Int)
     
     //the delegate that ViewPager has got End with Left Direction
-    func WTSReachedLeftEdge(panParam: UIPanGestureRecognizer)
+    func wtsReachedLeftEdge(panParam: UIPanGestureRecognizer)
     //the delegate that ViewPager has got End with Right Direction
-    func WTSReachedRightEdge(panParam: UIPanGestureRecognizer)
+    func wtsReachedRightEdge(panParam: UIPanGestureRecognizer)
     
 }
 
@@ -31,35 +33,35 @@ public enum WormStyle{
 
 public struct WormTabStripStylePropertyies {
     
-    var wormStyel:WormStyle = .bubble
+    var wormStyel: WormStyle = .bubble
     /**********************
       Heights
      **************************/
     
-    var kHeightOfWorm:CGFloat = 3
+    var kHeightOfWorm: CGFloat = 3
     
-    var kHeightOfWormForBubble:CGFloat = 45
+    var kHeightOfWormForBubble: CGFloat = 45
     
-    var kHeightOfDivider:CGFloat = 2
+    var kHeightOfDivider: CGFloat = 2
     
-    var kHeightOfTopScrollView:CGFloat = 50
+    var kHeightOfTopScrollView: CGFloat = 50
     
-    var kMinimumWormHeightRatio:CGFloat = 4/5
+    var kMinimumWormHeightRatio: CGFloat = 4/5
     
     /**********************
      paddings
      **************************/
     
     //Padding of tabs text to each side
-    var kPaddingOfIndicator:CGFloat = 30
+    var kPaddingOfIndicator: CGFloat = 30
     
     //initial value for the tabs margin
-    var kWidthOfButtonMargin:CGFloat = 0
+    var kWidthOfButtonMargin: CGFloat = 0
     
     
     var isHideTopScrollView = false
     
-    var spacingBetweenTabs:CGFloat = 15
+    var spacingBetweenTabs: CGFloat = 15
     
     var isWormEnable = true
     
@@ -68,55 +70,55 @@ public struct WormTabStripStylePropertyies {
      ************/
     // font size of tabs
     //let kFontSizeOfTabButton:CGFloat = 15
-    var tabItemDefaultFont:UIFont = UIFont(name: "arial", size: 14)!
-    var tabItemSelectedFont:UIFont = UIFont(name: "arial", size: 16)!
+    var tabItemDefaultFont: UIFont = UIFont(name: "arial", size: 14)!
+    var tabItemSelectedFont: UIFont = UIFont(name: "arial", size: 16)!
     
     /*****
      colors
      ****/
     
-    var tabItemDefaultColor:UIColor = .white
+    var tabItemDefaultColor: UIColor = .white
     
-    var tabItemSelectedColor:UIColor = .red
+    var tabItemSelectedColor: UIColor = .red
     
     //color for worm
-    var WormColor:UIColor = UIColor(netHex: 0x1EAAF1)
+    var WormColor: UIColor = UIColor(netHex: 0x1EAAF1)
     
-    var topScrollViewBackgroundColor:UIColor = UIColor(netHex: 0x364756)
+    var topScrollViewBackgroundColor: UIColor = UIColor(netHex: 0x364756)
     
-    var contentScrollViewBackgroundColor:UIColor = UIColor.gray
+    var contentScrollViewBackgroundColor: UIColor = UIColor.gray
     
-    var dividerBackgroundColor:UIColor = UIColor.red
+    var dividerBackgroundColor: UIColor = UIColor.red
     
 }
 
 
 public class WormTabStrip: UIView,UIScrollViewDelegate {
     
-    private let topScrollView:UIScrollView = UIScrollView()
+    private let topScrollView: UIScrollView = UIScrollView()
     
-    private let contentScrollView:UIScrollView = UIScrollView()
+    private let contentScrollView: UIScrollView = UIScrollView()
     
     public var shouldCenterSelectedWorm = true
     
-    public var Width:CGFloat!
+    public var Width: CGFloat!
     
-    public var Height:CGFloat!
+    public var Height: CGFloat!
     
-    private var titles:[String]! = []
+    private var titles: [String]! = []
     
-    private var contentViews:[UIView]! = []
+    private var contentViews: [UIView]! = []
     
-    private var tabs:[WormTabStripButton]! = []
+    private var tabs: [WormTabStripButton]! = []
     
-    private let divider:UIView = UIView()
+    private let divider: UIView = UIView()
     
-    private let worm:UIView = UIView()
+    private let worm: UIView = UIView()
     
-    public var eyStyle:WormTabStripStylePropertyies = WormTabStripStylePropertyies()
+    public var eyStyle: WormTabStripStylePropertyies = WormTabStripStylePropertyies()
     
     //delegate
-    weak var delegate:WormTabStripDelegate?
+    weak var delegate: WormTabStripDelegate?
     
     //Justify flag
     private var isJustified = false
@@ -124,7 +126,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     //tapping flag
     private var isUserTappingTab = false
     
-    private var dynamicWidthOfTopScrollView:CGFloat = 0
+    private var dynamicWidthOfTopScrollView: CGFloat = 0
     
     private let plusOneforMarginOfLastTabToScreenEdge = 1
     //MARK: init
@@ -134,7 +136,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         Height = self.frame.height
     }
     convenience required public init(key:String) {
-        self.init(frame:CGRect.zero)
+        self.init(frame: CGRect.zero)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -157,7 +159,12 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     
     private func validate(){
         if delegate == nil {
-                assert(false, "EYDelegate is null, please set the EYDelegate")
+            assert(false, "EYDelegate is null, please set the EYDelegate")
+            return
+        }
+
+        if delegate!.EYnumberOfTab() <= currentTabIndex {
+            assert(false, "currentTabIndex can not be bigger or equal to EYnumberOfTab")
         }
         //        for i in 0..<delegate.EYnumberOfTab() {
         //            titles.append(delegate.EYTitlesOfTab(i))
@@ -187,9 +194,9 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     private func addContentScrollView(){
         if eyStyle.isHideTopScrollView {
             //rootScrollView = UIScrollView(frame: CGRectMake(0,0,Width,Height))
-            contentScrollView.frame =  CGRect(x:0,y:0,width:Width,height:Height);
+            contentScrollView.frame =  CGRect(x: 0,y: 0,width: Width,height: Height);
         }else{
-            contentScrollView.frame = CGRect(x:0,y: eyStyle.kHeightOfTopScrollView+eyStyle.kHeightOfDivider,width:Width, height:Height-eyStyle.kHeightOfTopScrollView-eyStyle.kHeightOfDivider)
+            contentScrollView.frame = CGRect(x: 0,y: eyStyle.kHeightOfTopScrollView+eyStyle.kHeightOfDivider,width: Width, height: Height-eyStyle.kHeightOfTopScrollView-eyStyle.kHeightOfDivider)
         }
         contentScrollView.backgroundColor = eyStyle.contentScrollViewBackgroundColor
         contentScrollView.isPagingEnabled = true
@@ -218,7 +225,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     private func buildTopScrollViewsContent(){
         dynamicWidthOfTopScrollView = 0
         var XOffset:CGFloat = eyStyle.spacingBetweenTabs;
-        for i in 0..<delegate!.WTSNumberOfTabs(){
+        for i in 0..<delegate!.wtsNumberOfTabs(){
             //build the each tab and position it
             let tab:WormTabStripButton = WormTabStripButton()
             tab.index = i
@@ -238,7 +245,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         tab.frame.size.height = eyStyle.kHeightOfTopScrollView
         tab.paddingToEachSide = eyStyle.kPaddingOfIndicator
         //            tab.backgroundColor = UIColor.yellowColor()
-        tab.tabText = delegate!.WTSTitleForTab(index: tab.index!) as NSString?
+        tab.tabText = delegate!.wtsTitleForTab(index: tab.index!) as NSString?
         tab.textColor = eyStyle.tabItemDefaultColor
         tab.frame.origin.x = XOffset
         tab.frame.origin.y = 0
@@ -252,11 +259,11 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     
     // add all content views to content scroll view and tabs to top scroll view
     private func buildContentScrollViewsContent(){
-        let count = delegate!.WTSNumberOfTabs()
+        let count = delegate!.wtsNumberOfTabs()
         contentScrollView.contentSize.width = CGFloat(count)*self.frame.width
         for i in 0..<count{
             //position each content view
-            let view = delegate!.WTSViewOfTab(index: i)
+            let view = delegate!.wtsViewOfTab(index: i)
             view.frame.origin.x = CGFloat(i)*Width
             view.frame.origin.y = 0
             view.frame.size.height = contentScrollView.frame.size.height
@@ -292,7 +299,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
             let gap:CGFloat = Width - dynamicWidthOfTopScrollView
             // increase the space by dividing available space to # of tab plus one 
             //plus one bc we always want to have margin from last tab to to right edge of screen
-            eyStyle.spacingBetweenTabs +=  gap/CGFloat(delegate!.WTSNumberOfTabs()+plusOneforMarginOfLastTabToScreenEdge)
+            eyStyle.spacingBetweenTabs +=  gap/CGFloat(delegate!.wtsNumberOfTabs()+plusOneforMarginOfLastTabToScreenEdge)
             dynamicWidthOfTopScrollView = 0
             var XOffset:CGFloat = eyStyle.spacingBetweenTabs;
             for tab in tabs {
@@ -583,14 +590,15 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         tab.textColor = eyStyle.tabItemSelectedColor
         tab.font = eyStyle.tabItemSelectedFont
         syncAppearanceOfVC()
+        delegate!.wtsDidSelectTab(index: currentTabIndex)
     }
 
     private func syncAppearanceOfVC(){
-        let count = delegate!.WTSNumberOfTabs()
+        let count = delegate!.wtsNumberOfTabs()
         contentScrollView.contentSize.width = CGFloat(count)*self.frame.width
         for i in 0..<count{
             //position each content view
-            let view = delegate!.WTSViewOfTab(index: i)
+            let view = delegate!.wtsViewOfTab(index: i)
             view.frame.origin.x = CGFloat(i)*Width
             view.frame.origin.y = 0
             view.frame.size.height = contentScrollView.frame.size.height
@@ -606,12 +614,10 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
                 //view will move to parent
                 let vc = (responder as? UIViewController)!
                 guard let parent = delegate as? UIViewController else {
-//                    contentScrollView.addSubview(view)
                     return
                 }
                 parent.addChild(vc)
                 vc.beginAppearanceTransition(true, animated: false)
-//                contentScrollView.addSubview(view)
                 vc.didMove(toParent: parent)
                 vc.endAppearanceTransition()
             } else {
@@ -622,8 +628,6 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
                 }
                 vc.beginAppearanceTransition(false, animated: false)
                 vc.willMove(toParent: nil)
-//                contentScrollView.willRemoveSubview(vc.view)
-//                view.removeFromSuperview()
                 vc.removeFromParent()
                 vc.endAppearanceTransition()
             }
@@ -638,12 +642,12 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     @objc func scrollHandleUIPanGestureRecognizer(panParam:UIPanGestureRecognizer){
         
         if contentScrollView.contentOffset.x <= 0 {
-            self.delegate?.WTSReachedLeftEdge(panParam: panParam)
+            self.delegate?.wtsReachedLeftEdge(panParam: panParam)
         }
             
         else
             if contentScrollView.contentOffset.x >= contentScrollView.contentSize.width -  contentScrollView.bounds.size.width {
-                self.delegate?.WTSReachedRightEdge(panParam: panParam)
+                self.delegate?.wtsReachedRightEdge(panParam: panParam)
         }
         
     }

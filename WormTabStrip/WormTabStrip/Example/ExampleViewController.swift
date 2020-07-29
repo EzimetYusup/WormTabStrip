@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-class ExampleViewController: UIViewController,WormTabStripDelegate {
+class ExampleViewController: UIViewController, WormTabStripDelegate {
+
+
+
+
     var tabs:[UIViewController] = []
     let numberOfTabs = 10
     override func viewDidLoad() {
@@ -40,29 +44,31 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
         viewPager.buildUI()
     }
     
-    func WTSNumberOfTabs() -> Int {
+    func wtsNumberOfTabs() -> Int {
         return numberOfTabs
     }
     
-    func WTSTitleForTab(index: Int) -> String {
+    func wtsTitleForTab(index: Int) -> String {
         if(index%4==0){
             return "really long and longer Tab \(index)"
         }
         return "Tab \(index)"
     }
     
-    func WTSViewOfTab(index: Int) -> UIView {
+    func wtsViewOfTab(index: Int) -> UIView {
         let view = tabs[index]
         return view.view
     }
     
-    func WTSReachedLeftEdge(panParam: UIPanGestureRecognizer) {
+    func wtsReachedLeftEdge(panParam: UIPanGestureRecognizer) {
         
     }
     
-    func WTSReachedRightEdge(panParam: UIPanGestureRecognizer) {
+    func wtsReachedRightEdge(panParam: UIPanGestureRecognizer) {
         
     }
-    
-    
+
+    func wtsDidSelectTab(index: Int) {
+        print("selected index:\(index)")
+    }
 }
