@@ -163,7 +163,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
             return
         }
 
-        if delegate!.EYnumberOfTab() <= currentTabIndex {
+        if delegate!.wtsNumberOfTabs() <= currentTabIndex {
             assert(false, "currentTabIndex can not be bigger or equal to EYnumberOfTab")
         }
         //        for i in 0..<delegate.EYnumberOfTab() {
