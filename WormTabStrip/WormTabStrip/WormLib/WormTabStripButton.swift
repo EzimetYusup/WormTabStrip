@@ -15,7 +15,7 @@ class WormTabStripButton: UILabel{
     var paddingToEachSide:CGFloat = 10
     var tabText:NSString?{
         didSet{
-            let textSize:CGSize = tabText!.size(withAttributes: [NSAttributedStringKey.font: font])
+            let textSize:CGSize = tabText!.size(withAttributes: [NSAttributedString.Key.font: font])
             self.frame.size.width = textSize.width + paddingToEachSide + paddingToEachSide
             
             self.text = String(tabText!)

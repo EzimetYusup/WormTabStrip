@@ -26,10 +26,24 @@ class ViewController: UIViewController, UITableViewDataSource {
         table.dataSource = self
         self.view.addSubview(table)
         //auto layout make table view fill super view
-        let widthConstraint  = NSLayoutConstraint(item: table, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.width, multiplier: 1, constant: 0)
-        let heightConstraint = NSLayoutConstraint(item: table, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: view, attribute: NSLayoutAttribute.height, multiplier: 1, constant: 0)
+        let widthConstraint  = NSLayoutConstraint(item: table, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.width, multiplier: 1, constant: 0)
+        let heightConstraint = NSLayoutConstraint(item: table, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: view, attribute: NSLayoutConstraint.Attribute.height, multiplier: 1, constant: 0)
         view.addConstraints([widthConstraint, heightConstraint])
         // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("viewdidAppear")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        print("viewdidDisAppear")
     }
 
     override func didReceiveMemoryWarning() {

@@ -31,7 +31,7 @@ class ExampleViewController: UIViewController,WormTabStripDelegate {
         let viewPager:WormTabStrip = WormTabStrip(frame: frame)
         self.view.addSubview(viewPager)
         viewPager.delegate = self
-        viewPager.eyStyle.wormStyel = .BUBBLE
+        viewPager.eyStyle.wormStyel = .bubble
         viewPager.eyStyle.isWormEnable = true
         viewPager.eyStyle.spacingBetweenTabs = 15
         viewPager.eyStyle.dividerBackgroundColor = .red

@@ -11,27 +11,27 @@ import UIKit
 public protocol WormTabStripDelegate:class {
     
     //return the Number SubViews in the ViewPager
-    func WTSNumberOfTabs()->Int
+    func WTSNumberOfTabs() -> Int
     //return the View for sepecific position
-    func WTSViewOfTab(index:Int)->UIView
+    func WTSViewOfTab(index:Int) -> UIView
     //return the title for each view
     func WTSTitleForTab(index:Int) -> String
     
     //the delegate that ViewPager has got End with Left Direction
-    func WTSReachedLeftEdge(panParam:UIPanGestureRecognizer)
+    func WTSReachedLeftEdge(panParam: UIPanGestureRecognizer)
     //the delegate that ViewPager has got End with Right Direction
-    func WTSReachedRightEdge(panParam:UIPanGestureRecognizer)
+    func WTSReachedRightEdge(panParam: UIPanGestureRecognizer)
     
 }
 
 public enum WormStyle{
-    case BUBBLE
-    case LINE
+    case bubble
+    case line
 }
 
 public struct WormTabStripStylePropertyies {
     
-    var wormStyel:WormStyle = .BUBBLE
+    var wormStyel:WormStyle = .bubble
     /**********************
       Heights
      **************************/
@@ -211,7 +211,6 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     }
     
     private func buildContent(){
-        
         buildTopScrollViewsContent()
         buildContentScrollViewsContent()
     }
@@ -261,7 +260,24 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
             view.frame.origin.x = CGFloat(i)*Width
             view.frame.origin.y = 0
             view.frame.size.height = contentScrollView.frame.size.height
+
+            var responder: UIResponder? = view
+                   while !(responder is UIViewController) {
+                       responder = responder?.next
+                       if nil == responder {
+                           break
+                       }
+                   }
+            let vc = (responder as? UIViewController)!
+            guard let parent = delegate as? UIViewController else {
+                contentScrollView.addSubview(view)
+                return
+            }
+            parent.addChild(vc)
+            vc.beginAppearanceTransition(true, animated: false)
             contentScrollView.addSubview(view)
+            vc.didMove(toParent: parent)
+            vc.endAppearanceTransition()
         }
     }
     
@@ -502,7 +518,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
             
             worm.frame.size.width = currentWormWidth + distance
         }
-        if eyStyle.wormStyel == .LINE {
+        if eyStyle.wormStyel == .line {
                 worm.frame.origin.y = eyStyle.kHeightOfTopScrollView - eyStyle.kHeightOfWorm
         }else{
                 worm.frame.origin.y = (eyStyle.kHeightOfTopScrollView-worm.frame.size.height)/2
@@ -519,7 +535,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
     
     private func resetHeightOfWorm(){
         // if the style is line it should be placed under the tab
-        if eyStyle.wormStyel == .LINE {
+        if eyStyle.wormStyel == .line {
             worm.frame.origin.y = eyStyle.kHeightOfTopScrollView - eyStyle.kHeightOfWorm
             worm.frame.size.height = eyStyle.kHeightOfWorm
             
@@ -534,7 +550,7 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         
         var height:CGFloat = 0
         var originalHeight:CGFloat = 0
-        if eyStyle.wormStyel == .LINE {
+        if eyStyle.wormStyel == .line {
             height =  eyStyle.kHeightOfWorm*(self.currentWormWidth/(distance+currentWormWidth))
             originalHeight = eyStyle.kHeightOfWorm
         }else{
@@ -566,6 +582,54 @@ public class WormTabStrip: UIView,UIScrollViewDelegate {
         let tab = tabs[currentTabIndex]
         tab.textColor = eyStyle.tabItemSelectedColor
         tab.font = eyStyle.tabItemSelectedFont
+        syncAppearanceOfVC()
+    }
+
+    private func syncAppearanceOfVC(){
+        let count = delegate!.WTSNumberOfTabs()
+        contentScrollView.contentSize.width = CGFloat(count)*self.frame.width
+        for i in 0..<count{
+            //position each content view
+            let view = delegate!.WTSViewOfTab(index: i)
+            view.frame.origin.x = CGFloat(i)*Width
+            view.frame.origin.y = 0
+            view.frame.size.height = contentScrollView.frame.size.height
+
+            var responder: UIResponder? = view
+                             while !(responder is UIViewController) {
+                                 responder = responder?.next
+                                 if nil == responder {
+                                     break
+                                 }
+                             }
+            if i == currentTabIndex {
+                //view will move to parent
+                let vc = (responder as? UIViewController)!
+                guard let parent = delegate as? UIViewController else {
+//                    contentScrollView.addSubview(view)
+                    return
+                }
+                parent.addChild(vc)
+                vc.beginAppearanceTransition(true, animated: false)
+//                contentScrollView.addSubview(view)
+                vc.didMove(toParent: parent)
+                vc.endAppearanceTransition()
+            } else {
+                //remove view from parent
+                let vc = (responder as? UIViewController)!
+                guard let parent = delegate as? UIViewController else {
+                    return
+                }
+                vc.beginAppearanceTransition(false, animated: false)
+                vc.willMove(toParent: nil)
+//                contentScrollView.willRemoveSubview(vc.view)
+//                view.removeFromSuperview()
+                vc.removeFromParent()
+                vc.endAppearanceTransition()
+            }
+
+
+        }
     }
     /*************************************************
      //MARK:  Worm Calculations Ends
