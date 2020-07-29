@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
 s.name             = "WormTabStrip"
-s.version          = "1.0.1"
+s.version          = "1.0.2"
 s.summary          = "A ViewPager For iOS in Swift"
 s.description      = "Worm TabStrip Android ViewPager for iOS written in Swift, built from other view controllers placed inside a scroll view"
 s.homepage         = "https://github.com/EzimetYusup/WormTabStrip"

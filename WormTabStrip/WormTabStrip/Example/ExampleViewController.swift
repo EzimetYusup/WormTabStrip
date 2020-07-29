@@ -11,9 +11,6 @@ import UIKit
 
 class ExampleViewController: UIViewController, WormTabStripDelegate {
 
-
-
-
     var tabs:[UIViewController] = []
     let numberOfTabs = 10
     override func viewDidLoad() {
