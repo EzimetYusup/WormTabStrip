@@ -71,6 +71,19 @@ before you  you call
 ```swift
 viewPager.buildUI() 
 ```
+### Add ViewController to tabs
+Create 2 or more new ViewControllers ( you can create as many as you like but we’ ll stick with 2 here) , Drag to storyboard, and create corresponding files (ChildViewController1.swift, ChildViewController2.swift), associate the ViewControllers in StoryBoard with the appropriate classes.
+
+```swift
+//In the method: WTSViewOfTab(...)
+//Add this:
+let view = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "child1")
+return view
+
+//You can add a switch statment for other custom view controllers.
+
+```
+
 ### Available customization properties 
 |Property|Description|
 |:--|:--|
