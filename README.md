@@ -119,3 +119,6 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 [travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
 [codebeat-image]: https://codebeat.co/badges/c19b47ea-2f9d-45df-8458-b2d952fe9dad
 [codebeat-url]: https://codebeat.co/projects/github-com-vsouza-awesomeios-com
+
+## Stats
+![Alt](https://repobeats.axiom.co/api/embed/e612f41d0c8fcd289fe46649ce863a204c331aff.svg "Repobeats analytics image")
